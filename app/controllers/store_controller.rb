@@ -5,6 +5,7 @@ class StoreController < ApplicationController
   end
 
   def about_us
+    @about_us_paragraph_text = About.first.about_us_description
   end
 
   def FAQ
@@ -14,5 +15,6 @@ class StoreController < ApplicationController
   end
 
   def contact
+    @contact_us_message = 
   end
 end
