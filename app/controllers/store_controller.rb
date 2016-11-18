@@ -15,6 +15,7 @@ class StoreController < ApplicationController
   end
 
   def contact
-   # @contact_us_message = 
+    # process this as html
+    @contact_us_html_message = ContactInfo.first.contact_page_text.html_safe
   end
 end
