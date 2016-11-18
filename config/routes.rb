@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :products
+  resources :product_types
   root to: 'store#home'
   get 'store/home'
 
