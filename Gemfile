@@ -21,6 +21,11 @@ gem 'bootstrap', '~> 4.0.0.alpha5'
 # Image uploads! Carrierwave https://github.com/carrierwaveuploader/carrierwave
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
 
+# WYSIYG Editor that works with active admin! Link: https://github.com/galetahub/ckeditor
+gem 'ckeditor'
+# For carrierwave to work with ckeditor
+gem 'mini_magick'
+
 group :development, :test do
   gem 'byebug', platform: :mri
 end
