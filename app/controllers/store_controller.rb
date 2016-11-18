@@ -1,6 +1,7 @@
 class StoreController < ApplicationController
   def home
     @products = Product.all
+	@deck_size = 4
   end
 
   def about_us

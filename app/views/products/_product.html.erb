@@ -1,6 +1,9 @@
 <div class="product card">
+  <% if product.image.present? %>
+	<%= image_tag product.image, class: 'card-img-top' %>
+  <% end %>
   <div class="card-block"> 
-	<h4 class="card-title"> <%= product.name %> </h4>
-	<h6 class="card-text"> <%= product.description %> </h6>
+    <h4 class="card-title"> <%= product.name %> </h4>
+      <p class="card-text"> <%= product.description %> </p>
   </div>
 </div>

@@ -18,6 +18,9 @@ gem 'devise'
 #Bootstrap! https://github.com/twbs/bootstrap-rubygem
 gem 'bootstrap', '~> 4.0.0.alpha5'
 
+# Image uploads! Carrierwave https://github.com/carrierwaveuploader/carrierwave
+gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'
+
 group :development, :test do
   gem 'byebug', platform: :mri
 end
