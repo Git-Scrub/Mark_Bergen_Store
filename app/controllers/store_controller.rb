@@ -1,5 +1,6 @@
 class StoreController < ApplicationController
   def home
+    @products = Product.all
   end
 
   def about_us
