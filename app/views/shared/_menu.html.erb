@@ -9,17 +9,21 @@
     <li class="nav-item <%= 'active' if current_page?("/store/about_us") %>">
       <a class="nav-link" href="/store/about_us">About</a>
     </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="http://example.com" id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-      <div class="dropdown-menu" aria-labelledby="supportedContentDropdown">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-      </div>
-    </li>
   </ul>
-  <form class="form-inline float-xs-right">
-    <input class="form-control" type="text" name="search" placeholder="Search">
-    <button class="btn btn-outline-success" type="submit" value="search">Search</button>
-  </form>
+  <% if current_page?("/store") || current_page?("/") %>
+    <form class="form-inline float-xs-right">
+      <span class="col-lg-12 no-caridge-return">
+        <span class="button-group">
+          <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+		   <% @product_catagories.each do |product_cat| %>
+              <li><input type="checkbox" name="product_cat_list[]" value="<%=product_cat.id%>"/><%=product_cat.name%></li>
+			<% end %>
+          </ul> 
+        </span>
+        <input class="form-control" type="text" name="search" placeholder="Search">
+        <button class="btn btn-outline-success" type="submit" value="search">Search</button>
+	  </span>
+    </form>
+  <% end %>
 </nav>
