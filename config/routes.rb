@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get 'store/search'
 
   get 'store/contact'
+  
+  post 'store/search' => 'store#search', as: 'search_store'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

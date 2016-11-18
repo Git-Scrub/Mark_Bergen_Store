@@ -1,6 +1,11 @@
 class StoreController < ApplicationController
   def home
-    @products = Product.all
+    if params[:search]
+	  @products = Product.where(" name LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+	else
+      @products = Product.all
+	end
+	
 	@deck_size = 4
   end
 
@@ -17,5 +22,9 @@ class StoreController < ApplicationController
   def contact
     # process this as html
     @contact_us_html_message = ContactInfo.first.contact_page_text.html_safe
+  end
+  
+  def search_store
+  
   end
 end
