@@ -1,5 +1,12 @@
 ActiveAdmin.register ContactInfo do
+permit_params :contact_page_text
 
+form do |f|
+  f.inputs "Post" do
+	f.text_area :contact_page_text, :class => 'ckeditor'
+  end
+  f.actions
+end
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #

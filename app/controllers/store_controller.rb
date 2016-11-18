@@ -15,6 +15,6 @@ class StoreController < ApplicationController
   end
 
   def contact
-    @contact_us_message = 
+   # @contact_us_message = 
   end
 end
