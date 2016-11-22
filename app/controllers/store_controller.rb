@@ -26,6 +26,6 @@ class StoreController < ApplicationController
 
   def contact
     # process this as html
-    @contact_us_html_message = ContactInfo.first.contact_page_text.html_safe
+    @contact_us_html_message = ContactInfo.exists? ? ContactInfo.first.contact_page_text.html_safe : "Default Contact Us Message."
   end
 end
