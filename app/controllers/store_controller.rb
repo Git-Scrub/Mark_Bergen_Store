@@ -15,7 +15,7 @@ class StoreController < ApplicationController
   end
 
   def about_us
-    @about_us_paragraph_text = About.first.about_us_description
+    @about_us_paragraph_text = About.exists? ? first.about_us_description : "Default About us message"
   end
 
   def FAQ
