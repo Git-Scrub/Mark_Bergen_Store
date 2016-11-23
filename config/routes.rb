@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   resources :products
-  resources :product_types
+  resources :catagories
   root to: 'store#home'
   
   get 'store', to: 'store#home'
