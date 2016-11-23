@@ -1,17 +1,18 @@
 class StoreController < ApplicationController
   def home
-    if params[:search]
-	  @products = Product.where(" name LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
-	else
-      @products = Product.all
-	end
-	
-	if params[:product_cat_list]
-	  @products = @products.where("product_type_id IN (?)", params[:product_cat_list])
-	end
-	
+    @products = Product.all
 	@product_catagories = Catagory.all
 	@deck_size = 4
+	
+    if params[:product_cat_list]
+	  #@catagories = @product_catagories.where(id: params[:search])
+	  @products = Product.joins(:catagories)
+	end
+  
+  
+    if params[:search]
+	  #@products = @products.where(" Product.name LIKE ? OR Product.description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+	end
   end
 
   def about_us
