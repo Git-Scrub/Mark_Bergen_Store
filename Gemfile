@@ -12,6 +12,9 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'yaml_db'
 
+# gem used for pagintation: http://railscasts.com/episodes/254-pagination-with-kaminari
+gem 'kaminari'
+
 # Three gems for activeadmin
 gem 'activeadmin', github: 'activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'

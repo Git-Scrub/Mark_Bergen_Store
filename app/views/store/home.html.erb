@@ -1,5 +1,6 @@
 <div class="container-fluid">
 	<h1>Welcome!</h1>
+	<%= paginate @products %>
 	<% @products.each_slice(@deck_size) do |product| %>
 	  <div class="card-deck-wrapper">
 	  <div class="card-deck">

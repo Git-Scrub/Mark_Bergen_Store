@@ -1,6 +1,6 @@
 class StoreController < ApplicationController
   def home
-    @products = Product.all
+    @products = Product.all.page(params[:page]).per(2)
 	@product_catagories = Catagory.all
 	@deck_size = 4
 	
