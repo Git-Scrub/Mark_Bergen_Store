@@ -4,6 +4,7 @@
   <% end %>
   <div class="card-block"> 
     <h4 class="card-title no-default-link-styles"> <%= link_to product.name, product %> </h4>
+	  <p class="card-text"> <%= number_to_currency(product.price) %> </p>
       <p class="card-text"> <%= product.description %> </p>
   </div>
 </div>
