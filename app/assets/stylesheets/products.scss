@@ -5,3 +5,12 @@
 {
 	max-height: 300px;
 }
+
+.no-default-link-styles a, .no-default-link-styles a:focus, .no-default-link-styles a:hover
+{
+  border: none;
+  outline: none;
+  text-decoration: none;
+  color: inherit;
+  background-color: inherit;
+}

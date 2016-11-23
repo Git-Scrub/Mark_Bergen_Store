@@ -10,7 +10,7 @@ class StoreController < ApplicationController
 	  @products = @products.where("product_type_id IN (?)", params[:product_cat_list])
 	end
 	
-	@product_catagories = ProductType.all
+	@product_catagories = Catagory.all
 	@deck_size = 4
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123034723) do
+ActiveRecord::Schema.define(version: 20161123050239) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,19 @@ ActiveRecord::Schema.define(version: 20161123034723) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "catagories", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "catagories_products", id: false, force: :cascade do |t|
+    t.integer "catagory_id"
+    t.integer "product_id"
+    t.index ["catagory_id"], name: "index_catagories_products_on_catagory_id", using: :btree
+    t.index ["product_id"], name: "index_catagories_products_on_product_id", using: :btree
+  end
+
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string   "data_file_name",               null: false
     t.string   "data_content_type"
@@ -74,30 +87,13 @@ ActiveRecord::Schema.define(version: 20161123034723) do
     t.datetime "updated_at",        null: false
   end
 
-  create_table "product_product_types", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "product_types", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "products_id"
-    t.index ["products_id"], name: "index_product_types_on_products_id", using: :btree
-  end
-
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
     t.decimal  "price"
-    t.integer  "product_type_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "image"
-    t.index ["product_type_id"], name: "index_products_on_product_type_id", using: :btree
   end
 
-  add_foreign_key "product_types", "products", column: "products_id"
-  add_foreign_key "products", "product_types"
 end

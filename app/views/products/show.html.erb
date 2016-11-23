@@ -17,7 +17,9 @@
 
 <p>
   <strong>Product type:</strong>
-  <%= @product.product_type %>
+  <% @product_types.each do |product_type| %>
+	<%= product_type.name %>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
