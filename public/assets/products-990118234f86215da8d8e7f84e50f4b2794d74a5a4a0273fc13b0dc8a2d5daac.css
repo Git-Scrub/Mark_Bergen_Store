@@ -1,0 +1,31 @@
+/* line 4, C:/Users/dustytrash/Desktop/rails_project/Mark_Bergen_Store/app/assets/stylesheets/products.css.scss */
+.product .card-img-top {
+  max-height: 300px;
+}
+
+/* line 9, C:/Users/dustytrash/Desktop/rails_project/Mark_Bergen_Store/app/assets/stylesheets/products.css.scss */
+.no-default-link-styles a, .no-default-link-styles a:focus, .no-default-link-styles a:hover {
+  border: none;
+  outline: none;
+  text-decoration: none;
+  color: inherit;
+  background-color: inherit;
+}
+
+/* line 18, C:/Users/dustytrash/Desktop/rails_project/Mark_Bergen_Store/app/assets/stylesheets/products.css.scss */
+.product_cart_buttons {
+  max-width: 200px;
+}
+
+/** Ensure the buttons for adding more/less cart items is inline with the link. **/
+/* line 24, C:/Users/dustytrash/Desktop/rails_project/Mark_Bergen_Store/app/assets/stylesheets/products.css.scss */
+.remove-item-link {
+  margin-top: 8px;
+  margin-left: 33px;
+  float: left;
+}
+
+/* line 31, C:/Users/dustytrash/Desktop/rails_project/Mark_Bergen_Store/app/assets/stylesheets/products.css.scss */
+body {
+  background-color: red !important;
+}

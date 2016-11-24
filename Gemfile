@@ -22,7 +22,7 @@ gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'devise'
 
 #Bootstrap! https://github.com/twbs/bootstrap-rubygem
-gem 'bootstrap', '~> 4.0.0.alpha5'
+gem 'bootstrap-sass', '~> 3.3.6'
 
 # Image uploads! Carrierwave https://github.com/carrierwaveuploader/carrierwave
 gem 'carrierwave', '>= 1.0.0.rc', '< 2.0'

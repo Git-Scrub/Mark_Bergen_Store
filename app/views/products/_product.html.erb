@@ -7,7 +7,7 @@
 	  <p class="card-text"> <%= number_to_currency(product.price) %> </p>
       <p class="card-text"> <%= product.description %> </p>
 	  <span class="card-text">
-	    <% if @current_cart.empty? %>
+	    <% if @current_cart.nil? || @current_cart.empty? %>
 	      <%= link_to 'Add item to cart', add_to_cart_product_path(product), method: :post %>
 	    <% else %>
 		  <%= link_to 'Remove item from cart', remove_item_from_cart_store_path(product), method: :post, class: 'remove-item-link' %>

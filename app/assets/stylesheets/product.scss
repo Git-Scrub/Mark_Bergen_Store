@@ -1,0 +1,31 @@
+// Place all the styles related to the products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.product .card-img-top
+{
+	max-height: 300px;
+}
+
+.no-default-link-styles a, .no-default-link-styles a:focus, .no-default-link-styles a:hover
+{
+  border: none;
+  outline: none;
+  text-decoration: none;
+  color: inherit;
+  background-color: inherit;
+}
+
+.product_cart_buttons
+{
+	max-width: 200px;
+}
+
+/** Ensure the buttons for adding more/less cart items is inline with the link. **/
+.remove-item-link
+{
+  margin-top: 8px;
+  margin-left: 33px;
+  margin-right: 6px;
+  float: left;
+}
+
