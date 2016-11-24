@@ -6,7 +6,7 @@ class StoreController < ApplicationController
 	
     if params[:product_cat_list]
 	  #@catagories = @product_catagories.where(id: params[:search])
-	  @products = Product.joins(:catagories)
+	  #@products = Product.joins(:catagories)
 	end
   
   
