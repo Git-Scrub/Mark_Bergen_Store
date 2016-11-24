@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :customers
+  resources :customers, only: [:index] do
+    member do
+	  post :remember_do_call
+	  post :mark_as_called
+	end
+  end
   mount Ckeditor::Engine => '/ckeditor'
   resources :products
   resources :catagories
