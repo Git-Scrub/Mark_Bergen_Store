@@ -6,6 +6,25 @@
     <h4 class="card-title no-default-link-styles"> <%= link_to product.name, product %> </h4>
 	  <p class="card-text"> <%= number_to_currency(product.price) %> </p>
       <p class="card-text"> <%= product.description %> </p>
-	  <p class="card-text"> <%= link_to 'Add item to cart', add_to_cart_product_path(product), method: :post %> </p>
+	  <span class="card-text">
+	    <% if @current_cart.empty? %>
+	      <%= link_to 'Add item to cart', add_to_cart_product_path(product), method: :post %>
+	    <% else %>
+		  <%= link_to 'Remove item from cart', remove_item_from_cart_store_path(product), method: :post, class: 'remove-item-link' %>
+          <span class="input-group product_cart_buttons">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                <span class="glyphicon glyphicon-minus"></span>
+             </button>
+            </span>
+            <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
+                <span class="glyphicon glyphicon-plus"></span>
+             </button>
+            </span>
+          </span>
+	    <% end %>
+	  </span>
   </div>
 </div>

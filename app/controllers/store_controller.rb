@@ -13,6 +13,7 @@ class StoreController < ApplicationController
     if params[:search]
 	  #@products = @products.where(" Product.name LIKE ? OR Product.description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
 	end
+	@current_cart = session[:cart]
   end
 
   def about_us
@@ -32,5 +33,16 @@ class StoreController < ApplicationController
   
   def cart
     @cart_items = Product.find(session[:cart])
+  end
+  
+  def remove_item_from_cart
+    # Get the product id as an integer
+	product_id = params[:id].to_i
+	   
+	# Remove item from cart, if it exists (it should exist at this point)
+	session[:cart].delete(product_id) unless not session[:cart].include?(product_id)
+	   
+	# No view associated with this method, go back
+	redirect_to :back
   end
 end

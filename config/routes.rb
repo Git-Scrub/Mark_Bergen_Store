@@ -9,6 +9,12 @@ Rails.application.routes.draw do
 	end
   end
   
+  resources :store, only: [:about, :FAQ, :search, :contact, :cart] do
+    member do
+      post :remove_item_from_cart
+	end
+  end
+  
   resources :catagories
   root to: 'store#home'
   

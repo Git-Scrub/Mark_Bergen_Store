@@ -1,1 +1,7 @@
-<%= render @cart_items %>
+<% if @cart_items.empty? %>
+	<p> Cart is currently empty! </p>
+<% end %>
+
+<% @cart_items.each do |product| %>
+ <p> <%= render 'store/cart_product', :product => product %> </p>
+<% end %>

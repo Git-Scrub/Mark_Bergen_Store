@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require tether
 //= require ckeditor/init
 //= require bootstrap-sprockets
 //= require jquery_ujs

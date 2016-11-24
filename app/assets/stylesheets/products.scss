@@ -14,3 +14,18 @@
   color: inherit;
   background-color: inherit;
 }
+
+.product_cart_buttons
+{
+	max-width: 200px;
+}
+
+/** Ensure the buttons for adding more/less cart items is inline with the link. **/
+.remove-item-link
+{
+  margin-top: 8px;
+  margin-left: 33px;
+  float: left;
+}
+
+
