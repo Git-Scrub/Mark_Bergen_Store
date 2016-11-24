@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
-  resources :customers, only: [:index] do
+  resources :customers, only: [:index]
+  
+  mount Ckeditor::Engine => '/ckeditor'
+  resources :products, only: [:index, :show] do
     member do
-	  post :remember_do_call
-	  post :mark_as_called
+	  post :add_to_cart
 	end
   end
-  mount Ckeditor::Engine => '/ckeditor'
-  resources :products
   resources :catagories
   root to: 'store#home'
   
