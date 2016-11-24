@@ -1,9 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Customers</h1>
-<%# Session test, delete this %>
-<p> You have visited this page <%= pluralize(@visit_count, 'time') %> </p>
-
 <table>
   <thead>
     <tr>
@@ -22,8 +19,6 @@
         <td><%= customer.last_name %></td>
         <td><%= customer.email %></td>
         <td><%= customer.home_address %></td>
-		
-		<%= link_to 'Remember to call', remember_to_call_customer_path(customer), method: :post %>
       </tr>
     <% end %>
   </tbody>

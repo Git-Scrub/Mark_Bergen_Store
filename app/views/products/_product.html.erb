@@ -6,5 +6,6 @@
     <h4 class="card-title no-default-link-styles"> <%= link_to product.name, product %> </h4>
 	  <p class="card-text"> <%= number_to_currency(product.price) %> </p>
       <p class="card-text"> <%= product.description %> </p>
+	  <p class="card-text"> <%= link_to 'Add item to cart', add_to_cart_product_path(product), method: :post %> </p>
   </div>
 </div>

@@ -2,11 +2,13 @@ Rails.application.routes.draw do
   resources :customers, only: [:index]
   
   mount Ckeditor::Engine => '/ckeditor'
+  
   resources :products, only: [:index, :show] do
     member do
 	  post :add_to_cart
 	end
   end
+  
   resources :catagories
   root to: 'store#home'
   
