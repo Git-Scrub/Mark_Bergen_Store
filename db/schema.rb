@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161124075806) do
+ActiveRecord::Schema.define(version: 20161124080140) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,8 +117,9 @@ ActiveRecord::Schema.define(version: 20161124075806) do
   create_table "provinces", force: :cascade do |t|
     t.string   "name"
     t.decimal  "tax_rate"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "province_code"
   end
 
 end
