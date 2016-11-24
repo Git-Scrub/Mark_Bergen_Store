@@ -29,4 +29,8 @@ class StoreController < ApplicationController
     # process this as html
     @contact_us_html_message = ContactInfo.exists? ? ContactInfo.first.contact_page_text.html_safe : "Default Contact Us Message."
   end
+  
+  def cart
+    @cart_items = Product.find(session[:cart])
+  end
 end

@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get 'store/search'
 
   get 'store/contact'
+  
+  get 'store/cart'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

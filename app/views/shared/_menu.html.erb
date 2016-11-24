@@ -9,6 +9,9 @@
     <li class="nav-item <%= 'active' if current_page?("/store/about_us") %>">
       <a class="nav-link" href="/store/about_us">About</a>
     </li>
+	<li class="nav-item <%= 'active' if current_page?("/store/cart") %>">
+      <a class="nav-link" href="/store/cart">My Cart</a>
+    </li>
   </ul>
   <% if current_page?("/store") || current_page?("/") %>
     <form class="form-inline float-xs-right">
