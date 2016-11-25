@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users
   resources :customers, only: [:index]
   
   mount Ckeditor::Engine => '/ckeditor'
@@ -6,6 +7,8 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show] do
     member do
 	  post :add_to_cart
+	  post :add_existing_to_cart
+	  post :remove_existing_from_cart
 	end
   end
   
@@ -29,6 +32,8 @@ Rails.application.routes.draw do
   get 'store/contact'
   
   get 'store/cart'
+  
+  get 'store/sign_up'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

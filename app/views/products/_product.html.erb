@@ -7,21 +7,26 @@
 	  <p class="card-text"> <%= number_to_currency(product.price) %> </p>
       <p class="card-text"> <%= product.description %> </p>
 	  <span class="card-text">
-	    <% unless @current_cart.include? product.id %>
+	    <% unless @current_cart.any? { |ci| ci["product_id"] ==  product.id} %>
 	      <%= link_to 'Add item to cart', add_to_cart_product_path(product), method: :post %>
 	    <% else %>
 		  <%= link_to 'Remove item from cart', remove_item_from_cart_store_path(product), method: :post, class: 'remove-item-link' %>
           <span class="input-group product_cart_buttons">
             <span class="input-group-btn">
-              <button type="button" class="btn btn-default btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+              <button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant[1]"
+			  onclick=<%= "remove_from_cart_product_path(#{product.id})" %>
+			  >
                 <span class="glyphicon glyphicon-minus"></span>
              </button>
             </span>
-            <input type="text" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
+			<%= number_field_tag 'quantity',
+			    session[:cart].select{|ci| ci['product_id'] ==  product.id}.first['number_of_items'],
+				class: "form-control input-number product-#{product.id}", 
+				:readonly => true%>
             <span class="input-group-btn">
               <button type="button" class="btn btn-default btn-number" data-type="plus" 
 					data-field="quant[1]" 
-					onclick=<%="add_cart_item(#{product.id})"%>
+					onclick=<%= "add_to_cart(#{product.id})" %>
 			  >
                 <span class="glyphicon glyphicon-plus"></span>
              </button>

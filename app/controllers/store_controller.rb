@@ -26,6 +26,9 @@ class StoreController < ApplicationController
 
   def search
   end
+  
+  def sign_up
+  end
 
   def contact
     # process this as html
@@ -33,11 +36,14 @@ class StoreController < ApplicationController
   end
   
   def cart
-    @cart_items = Product.find(session[:cart])
-  end
-  
-  def cart_contains product
-    return session[:cart].contains(product)
+    @cart_items = []
+	@current_cart = session[:cart]
+	
+	session[:cart].each do |cart_item|
+	  @cart_items << Product.find(cart_item['product_id'])
+	end
+	
+    #@cart_items = Product.find(session[:cart])
   end
   
   def remove_item_from_cart
@@ -45,7 +51,7 @@ class StoreController < ApplicationController
 	product_id = params[:id].to_i
 	   
 	# Remove item from cart, if it exists (it should exist at this point)
-	session[:cart].delete(product_id) unless not session[:cart].include?(product_id)
+	session[:cart].delete_if { |h| h["product_id"] == product_id }
 	   
 	# No view associated with this method, go back
 	redirect_to :back
@@ -54,6 +60,6 @@ class StoreController < ApplicationController
   private
     # Used to setup a shopping cart
 	def initialize_session
-	   session[:cart] ||= []
+	   session[:cart] ||= {}
 	end
 end

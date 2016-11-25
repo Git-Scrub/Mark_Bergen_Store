@@ -1,3 +1,4 @@
-@import "main";
+@import "bootstrap_override.scss";
+@import "product.scss";
+// Custom bootstrap variables must be set or imported before bootstrap itself.
 @import "bootstrap";
-@import "*"
