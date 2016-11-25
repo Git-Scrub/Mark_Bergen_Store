@@ -49,6 +49,8 @@ Rails.application.routes.draw do
   
   get 'store/check_out'
   
+  get 'store/order_summary'
+  
   
   
   

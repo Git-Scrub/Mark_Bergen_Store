@@ -67,6 +67,7 @@ class StoreController < ApplicationController
   end
   
   def create_new_order
+	session.delete(:order)
 	first_name = params[:my_data][:first_name]
 	last_name = params[:my_data][:last_name]
 	email = params[:my_data][:email]
@@ -74,25 +75,47 @@ class StoreController < ApplicationController
 	city = params[:my_data][:city]
 	province = params[:my_data][:province]
 	
-	@new_customer = Customer.new(:first_name => first_name, 
+	@new_customer = Customer.new
+	@new_customer.assign_attributes(:first_name => first_name, 
 								   :last_name => last_name,
 								   :email => email,
 								   :home_address => address,
 								   :city => city,
 								   :province_id => province)
-								   
+	# We basically want to ensure the customer and order are valid, for quick validation.
+    # The order or customer won't be saved.
 	if @new_customer.valid?
-	  @new_user = User.new(:user_name => user_name, :password => password, :customer => @new_customer)
-	  if @new_user.valid?
-		#@new_user.save
-		#session[:user] = @new_user.user_name
-	    #redirect_to root_path
+	  @new_order = Order.new
+	  @new_order.assign_attributes({:customer => @new_customer})
+	  if @new_order.valid?
+	    # Note: We're setting it to customer here
+	    session[:order] = @new_customer
+	    redirect_to '/store/order_summary'
 	  else
-	    render json: {error: @new_user.errors}
+	    render json: {error: @new_order.errors}
 	  end
 	else
 	  render json: {error: @new_customer.errors}
 	end
+  end
+  
+  def order_summary
+    province = Province.find(session[:order]['province_id'])
+	tax_rate = (province.gst + province.pst + province.hst)
+	@products = []
+    @total_before_taxes = 0.0
+	@total_taxes = 0.0
+	@grand_total = 0.0
+	
+	session[:cart].each do |cart_item|
+	  product = Product.find(cart_item['product_id'])
+	  @products << product
+	  product_cost = product.price * cart_item['number_of_items']
+	  @total_before_taxes += product_cost
+	  @total_taxes += (tax_rate * product_cost)
+	end
+	@current_cart = session[:cart]
+	@grand_total = (@total_before_taxes+@total_taxes)
   end
 
   def contact
@@ -112,9 +135,6 @@ class StoreController < ApplicationController
   end
   
   def check_out
-    @total_before_taxes = 0.0
-	@tax_total = 0.0
-    @cart_items = []
 	@current_cart = session[:cart]
 	
 	if session[:user]
@@ -124,14 +144,7 @@ class StoreController < ApplicationController
 	  @email = logged_in_user.email
 	  @address = logged_in_user.home_address
 	  @city = logged_in_user.city
-	  @province = logged_in_user.province
-	end
-	
-	session[:cart].each do |cart_item|
-	  product = Product.find(cart_item['product_id'])
-	  @cart_items << product
-	  @total_before_taxes += (product.price * cart_item['number_of_items'])
-	  #@tax_total += ((product.gst + product.hst + product.pst) * product.price)
+	  @province = logged_in_user.province_id
 	end
   end
   

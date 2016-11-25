@@ -1,0 +1,10 @@
+<h1>Order Summary</h1>
+<p>Order Subtotal: <%=number_to_currency(@total_before_taxes)%></p>
+<p>Total taxes: <%=number_to_currency(@total_taxes)%></p>
+<p>Grand Total: <%=number_to_currency(@grand_total)%></p>
+<%= render @products %>
+
+<p id="errors"> </p>
+<div class="submission">
+ <p> <a href="finialize_order"> SUBMIT PURCHASE </a> </p>
+</div>
