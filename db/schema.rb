@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125062102) do
+ActiveRecord::Schema.define(version: 20161125084635) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,7 +103,9 @@ ActiveRecord::Schema.define(version: 20161125062102) do
     t.datetime "updated_at",   null: false
     t.string   "city"
     t.integer  "province_id"
+    t.integer  "user_id"
     t.index ["province_id"], name: "index_customers_on_province_id", using: :btree
+    t.index ["user_id"], name: "index_customers_on_user_id", using: :btree
   end
 
   create_table "ip_addresses", force: :cascade do |t|
@@ -137,10 +139,14 @@ ActiveRecord::Schema.define(version: 20161125062102) do
   create_table "users", force: :cascade do |t|
     t.string   "user_name"
     t.string   "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "customer_id"
+    t.index ["customer_id"], name: "index_users_on_customer_id", using: :btree
   end
 
   add_foreign_key "customers", "provinces"
+  add_foreign_key "customers", "users"
   add_foreign_key "provinces", "customers"
+  add_foreign_key "users", "customers"
 end

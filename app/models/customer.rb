@@ -3,4 +3,5 @@ class Customer < ApplicationRecord
    validates_format_of :email, :with => /@/
    
    belongs_to :province
+   belongs_to :user
 end
