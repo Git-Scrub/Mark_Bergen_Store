@@ -4,6 +4,7 @@ class Customer < ApplicationRecord
    
    belongs_to :province
    belongs_to :user
+   has_many :orders
    
    def self.next_id_sequence
     ActiveRecord::Base.connection
