@@ -12,9 +12,18 @@
 	<li class="nav-item <%= 'active' if current_page?("/store/cart") %>">
       <a class="nav-link" href="/store/cart">My Cart</a>
     </li>
-	<li class="nav-item <%= 'active' if current_page?("/store/signup") %>">
-      <a class="nav-link" href="/store/sign_up">Sign Up</a>
-    </li>
+	<% if session[:user] %>
+	  <li class="nav-item <%= 'active' if current_page?("/store/signout") %>">
+        <a class="nav-link" href="/store/sign_out">Sign Up</a>
+      </li>
+	<% else %>
+	  <li class="nav-item <%= 'active' if current_page?("/store/signup") %>">
+        <a class="nav-link" href="/store/sign_up">Sign Up</a>
+      </li>
+	  <li class="nav-item <%= 'active' if current_page?("/store/sign_in") %>">
+        <a class="nav-link" href="/store/sign_in">Sign In</a>
+      </li>
+	<% end %>
   </ul>
   <% if current_page?("/store") || current_page?("/") %>
     <form class="form-inline float-xs-right">

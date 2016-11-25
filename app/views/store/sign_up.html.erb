@@ -10,7 +10,7 @@
 	 <p class="input_paragraph"> Email: <%= u.text_field :email %> </p>
 	 <p class="input_paragraph"> Address: <%= u.text_field :home_address %> </p>
 	 <p class="input_paragraph"> City: <%= u.text_field :city %> </p>
-	 <!-- <p> Province: <%= u.text_field :province %> </p> -->
+	 <p class="input_paragraph"> Province: <%= u.select :province_id, options_for_select(Province.all.map{|s|[s.name, s.id]}) %> </p>
    </div>
  <% end %>
  <p id="errors"> </p>

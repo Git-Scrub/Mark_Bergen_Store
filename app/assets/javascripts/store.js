@@ -6,12 +6,13 @@ function submit_new_user()
 		last_name = $('#customer_last_name').val(),
 		email = $('#customer_email').val(),
 		address = $('#customer_home_address').val(),
-		city = $('#customer_city').val();
+		city = $('#customer_city').val(),
+		province = $('#customer_province_id').val();
 		
 	$.ajax({
 	  type:'POST',
 	  url:'/create_new_user',
-	  data: {my_data: {user_name: userName, password: password, first_name: first_name, last_name: last_name, email: email, address: address, city: city }},
+	  data: {my_data: {user_name: userName, password: password, first_name: first_name, last_name: last_name, email: email, address: address, city: city, province: province}},
 	  success:function(data) {
 		console.log(data);
 	    if(data && !data['error'])
@@ -71,6 +72,11 @@ function getErrorMessage(data)
 	if(data['error']['city'])
 	{
 		errorMessage += "city " + data['error']['city']
+	}
+	
+	if(data['error']['province_id'])
+	{
+		errorMessage += "Province " + data['error']['province_id']
 	}
 	
 	return errorMessage;

@@ -30,6 +30,9 @@ class StoreController < ApplicationController
   def sign_up
   end
   
+  def sign_in
+  end
+  
   def create_new_user
     user_name = params[:my_data][:user_name]
 	password = params[:my_data][:password]
@@ -38,25 +41,26 @@ class StoreController < ApplicationController
 	email = params[:my_data][:email]
 	address = params[:my_data][:email]
 	city = params[:my_data][:city]
+	province = params[:my_data][:province]
 	
-	@new_user = User.new(:user_name => user_name, :password => password)
-	
-	if @new_user.valid?
-	  @new_customer = Customer.new(:first_name => first_name, 
+	@new_customer = Customer.new(:first_name => first_name, 
 								   :last_name => last_name,
 								   :email => email,
 								   :home_address => address,
-								   :city => city)
-	  if @new_customer.valid?
-	    @new_user.save
-		@new_customer.save
+								   :city => city,
+								   :province_id => province)
+								   
+	if @new_customer.valid?
+	  @new_user = User.new(:user_name => user_name, :password => password, :customer => @new_customer)
+	  if @new_user.valid?
+		@new_user.save
+		session[:user] = @new_user.id
 	    redirect_to root_path
 	  else
-	    render json: {error: @new_customer.errors}
+	    render json: {error: @new_user.errors}
 	  end
 	else
-	  # return error if the new user cannot be created
-	  render json: {error: @new_user.errors }
+	  render json: {error: @new_customer.errors}
 	end
   end
 

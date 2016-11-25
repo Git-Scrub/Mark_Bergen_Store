@@ -4,4 +4,10 @@ class Customer < ApplicationRecord
    
    belongs_to :province
    belongs_to :user
+   
+   def self.next_id_sequence
+    ActiveRecord::Base.connection
+                      .select_value('select last_value from Customer_id_seq')
+                      .to_i
+  end
 end
