@@ -17,10 +17,10 @@ class Province < ApplicationRecord
 	   self.gst = self.gst / 100
 	 end
 	 if self.hst > 1
-	   self.gst = self.gst / 100
+	   self.hst = self.hst / 100
 	 end
 	 if self.pst > 1
-	   self.gst = self.gst / 100
+	   self.pst = self.pst / 100
 	 end
    end
 end
