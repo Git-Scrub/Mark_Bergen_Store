@@ -11,7 +11,9 @@ Rails.application.routes.draw do
 	end
   end
   
-  post '/create_new_user', to: 'store#create_new_user' 
+  post '/create_new_user', to: 'store#create_new_user'
+  post '/create_new_order', to: 'store#create_new_order'
+  post 'users/sign_in', to: 'users#sign_in'
   
   resources :store, only: [:about, :FAQ, :search, :contact, :cart] do
     member do
@@ -21,7 +23,10 @@ Rails.application.routes.draw do
   end
   
   resources :catagories
+  
   resources :users
+  
+  
   root to: 'store#home'
   
   get 'store', to: 'store#home'
@@ -37,6 +42,14 @@ Rails.application.routes.draw do
   get 'store/cart'
   
   get 'store/sign_up'
+  
+  get 'store/sign_in'
+  
+  get 'store/sign_out'
+  
+  get 'store/check_out'
+  
+  
   
   
 

@@ -1,5 +1,4 @@
 <div class="container-fluid">
-    <%= debug session[:cart] %>
 	<h1>Welcome!</h1>
 	<%= paginate @products %>
 	<% @products.each_slice(@deck_size) do |product| %>

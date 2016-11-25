@@ -31,6 +31,7 @@ function submit_new_user()
 		}
 	  }, error: function(jqXHR, textStatus, errorThrown){
 		$('#errors').text(textStatus);
+		$('#errors').show();
         console.log(errorThrown);
       }
     });
@@ -80,4 +81,41 @@ function getErrorMessage(data)
 	}
 	
 	return errorMessage;
+}
+
+function submit_order()
+{
+	var first_name = $('#customer_first_name').val(),
+		last_name = $('#customer_last_name').val(),
+		email = $('#customer_email').val(),
+		address = $('#customer_home_address').val(),
+		city = $('#customer_city').val(),
+		province = $('#customer_province_id').val();
+		
+	$.ajax({
+	  type:'POST',
+	  url:'/create_new_order',
+	  data: {my_data: {first_name: first_name, last_name: last_name, email: email, address: address, city: city, province: province}},
+	  success:function(data) {
+		console.log(data);
+	    if(data && !data['error'])
+		{
+		  console.log(data)
+		}
+		else if(data['error'])
+		{
+			var errorMessage = getErrorMessage(data);
+			$('#errors').text(errorMessage);
+			$('#errors').show();
+		}
+		else
+		{
+			$('#errors').text("Something went wrong. No data recieved but success on Ajax call");
+		}
+	  }, error: function(jqXHR, textStatus, errorThrown){
+		$('#errors').text(textStatus);
+		$('#errors').show();
+        console.log(errorThrown);
+      }
+    });
 }

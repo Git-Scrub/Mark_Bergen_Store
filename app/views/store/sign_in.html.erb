@@ -1,0 +1,10 @@
+<h1>Sign in to an existing account with us!</h1>
+  <%= form_for(:user) do |f| %>
+    <p class="input_paragraph"> Username: <%= f.text_field :user_name %></p>
+    <p class="input_paragraph"> Password: <%= f.password_field :password %></p>
+  <% end %>
+ <p id="errors"> </p>
+ <div class="actions">
+   <button onclick="sign_in_user()"> Sign in! </button>
+ </div>
+</div>

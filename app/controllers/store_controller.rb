@@ -30,7 +30,9 @@ class StoreController < ApplicationController
   def sign_up
   end
   
-  def sign_in
+  def sign_out
+    session.delete(:user)
+	redirect_to :back
   end
   
   def create_new_user
@@ -39,7 +41,7 @@ class StoreController < ApplicationController
 	first_name = params[:my_data][:first_name]
 	last_name = params[:my_data][:last_name]
 	email = params[:my_data][:email]
-	address = params[:my_data][:email]
+	address = params[:my_data][:address]
 	city = params[:my_data][:city]
 	province = params[:my_data][:province]
 	
@@ -54,8 +56,37 @@ class StoreController < ApplicationController
 	  @new_user = User.new(:user_name => user_name, :password => password, :customer => @new_customer)
 	  if @new_user.valid?
 		@new_user.save
-		session[:user] = @new_user.id
+		session[:user] = @new_user.user_name
 	    redirect_to root_path
+	  else
+	    render json: {error: @new_user.errors}
+	  end
+	else
+	  render json: {error: @new_customer.errors}
+	end
+  end
+  
+  def create_new_order
+	first_name = params[:my_data][:first_name]
+	last_name = params[:my_data][:last_name]
+	email = params[:my_data][:email]
+	address = params[:my_data][:address]
+	city = params[:my_data][:city]
+	province = params[:my_data][:province]
+	
+	@new_customer = Customer.new(:first_name => first_name, 
+								   :last_name => last_name,
+								   :email => email,
+								   :home_address => address,
+								   :city => city,
+								   :province_id => province)
+								   
+	if @new_customer.valid?
+	  @new_user = User.new(:user_name => user_name, :password => password, :customer => @new_customer)
+	  if @new_user.valid?
+		#@new_user.save
+		#session[:user] = @new_user.user_name
+	    #redirect_to root_path
 	  else
 	    render json: {error: @new_user.errors}
 	  end
@@ -78,6 +109,30 @@ class StoreController < ApplicationController
 	end
 	
     #@cart_items = Product.find(session[:cart])
+  end
+  
+  def check_out
+    @total_before_taxes = 0.0
+	@tax_total = 0.0
+    @cart_items = []
+	@current_cart = session[:cart]
+	
+	if session[:user]
+	  logged_in_user = User.find_by(user_name: session[:user]).customer
+	  @first_name = logged_in_user.first_name
+	  @last_name = logged_in_user.last_name
+	  @email = logged_in_user.email
+	  @address = logged_in_user.home_address
+	  @city = logged_in_user.city
+	  @province = logged_in_user.province
+	end
+	
+	session[:cart].each do |cart_item|
+	  product = Product.find(cart_item['product_id'])
+	  @cart_items << product
+	  @total_before_taxes += (product.price * cart_item['number_of_items'])
+	  #@tax_total += ((product.gst + product.hst + product.pst) * product.price)
+	end
   end
   
   def remove_item_from_cart

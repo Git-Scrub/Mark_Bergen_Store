@@ -14,7 +14,7 @@
     </li>
 	<% if session[:user] %>
 	  <li class="nav-item <%= 'active' if current_page?("/store/signout") %>">
-        <a class="nav-link" href="/store/sign_out">Sign Up</a>
+        <a class="nav-link" href="/store/sign_out">Sign Out</a>
       </li>
 	<% else %>
 	  <li class="nav-item <%= 'active' if current_page?("/store/signup") %>">

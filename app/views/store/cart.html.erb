@@ -1,5 +1,7 @@
 <% if @cart_items.empty? %>
 	<p> Cart is currently empty! </p>
+<% else %>
+   <%= link_to 'CHECKOUT HERE!', 'check_out' %>
 <% end %>
 
 <% @cart_items.each do |product| %>
