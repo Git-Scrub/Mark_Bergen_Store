@@ -1,4 +1,5 @@
 class StoreController < ApplicationController
+  before_action :initialize_session
   def home
     @products = Product.all.page(params[:page]).per(2)
 	@product_catagories = Catagory.all
@@ -35,6 +36,10 @@ class StoreController < ApplicationController
     @cart_items = Product.find(session[:cart])
   end
   
+  def cart_contains product
+    return session[:cart].contains(product)
+  end
+  
   def remove_item_from_cart
     # Get the product id as an integer
 	product_id = params[:id].to_i
@@ -45,4 +50,10 @@ class StoreController < ApplicationController
 	# No view associated with this method, go back
 	redirect_to :back
   end
+  
+  private
+    # Used to setup a shopping cart
+	def initialize_session
+	   session[:cart] ||= []
+	end
 end

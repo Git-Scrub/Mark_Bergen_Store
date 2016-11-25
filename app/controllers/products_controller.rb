@@ -5,6 +5,7 @@ class ProductsController < InheritedResources::Base
 	   @product = Product.find(params[:id])
 	   @product_types = @product.nil? ? [] : @product.catagories
    end
+   
    def add_to_cart
 	   # Get the product id as an integer
 	   product_id = params[:id].to_i
