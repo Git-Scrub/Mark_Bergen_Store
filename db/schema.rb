@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125111118) do
+ActiveRecord::Schema.define(version: 20161125111600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,8 @@ ActiveRecord::Schema.define(version: 20161125111118) do
     t.string   "city"
     t.integer  "province_id"
     t.integer  "user_id"
+    t.integer  "order_id"
+    t.index ["order_id"], name: "index_customers_on_order_id", using: :btree
     t.index ["province_id"], name: "index_customers_on_province_id", using: :btree
     t.index ["user_id"], name: "index_customers_on_user_id", using: :btree
   end
@@ -150,6 +152,7 @@ ActiveRecord::Schema.define(version: 20161125111118) do
     t.index ["customer_id"], name: "index_users_on_customer_id", using: :btree
   end
 
+  add_foreign_key "customers", "orders"
   add_foreign_key "customers", "provinces"
   add_foreign_key "customers", "users"
   add_foreign_key "provinces", "customers"
