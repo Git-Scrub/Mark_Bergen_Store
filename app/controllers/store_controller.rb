@@ -124,7 +124,9 @@ class StoreController < ApplicationController
 
   def contact
     # process this as html
+    # rubocop:disable Rails/OutputSafety
     @contact_us_html_message = ContactInfo.exists? ? ContactInfo.first.contact_page_text.html_safe : 'Default Contact Us Message.'
+    # rubocop:enable Rails/OutputSafety
   end
 
   def cart
