@@ -77,44 +77,45 @@ class StoreController < ApplicationController
     address = params[:my_data][:address]
     city = params[:my_data][:city]
     province = params[:my_data][:province]
-	
-	if session[:user]
-      @new_customer = User.find_by(user_name: session[:user]).customer
-	else
-	  @new_customer = Customer.new
-	end
-	
-	fill_customer_record(@new_customer, first_name, last_name, email, address, city, province)
+
+    @new_customer = if session[:user]
+                      User.find_by(user_name: session[:user]).customer
+                    else
+                      Customer.new
+                    end
+
+    fill_customer_record(@new_customer, first_name, last_name, email, address, city, province)
 
     # We basically want to ensure the customer and order are valid, for quick validation.
     # The order or customer won't be saved.
     if @new_customer.valid?
-	  @new_order = Order.new
+      @new_order = Order.new
       @new_order.assign_attributes(customer: @new_customer)
-	  order_items = []
-	  
-	  session[:cart].each do |cart_item|
-	    @new_order_item = OrderItemTable.new
-		@product = Product.find(cart_item['product_id'])
-		@new_order_item.assign_attributes(
-			product: @product,
-			amount_ordered: cart_item['number_of_items'],
-			tax_rate_used: 0.0,
-			price_per_item: @product.price)
-		order_items << @new_order_item
+      order_items = []
+
+      session[:cart].each do |cart_item|
+        @new_order_item = OrderItemTable.new
+        @product = Product.find(cart_item['product_id'])
+        @new_order_item.assign_attributes(
+          product: @product,
+          amount_ordered: cart_item['number_of_items'],
+          tax_rate_used: 0.0,
+          price_per_item: @product.price
+        )
+        order_items << @new_order_item
       end
 
-	  @new_order.assign_attributes(order_item_tables: order_items)
-	  
+      @new_order.assign_attributes(order_item_tables: order_items)
+
       if @new_order.valid?
-	    @new_order.save
+        @new_order.save
         # Note: We're setting it to customer here
         session[:order] = @new_customer
         redirect_to '/store/order_summary'
-	  else
-	    render json: { error: @new_order.errors }
-	  end
-	  #render json: { error: @new_customer.errors }
+      else
+        render json: { error: @new_order.errors }
+      end
+      # render json: { error: @new_customer.errors }
     end
   end
 
@@ -138,8 +139,8 @@ class StoreController < ApplicationController
   end
 
   def contact
-    # process this as html
     # rubocop:disable Rails/OutputSafety
+    # process this as html
     @contact_us_html_message = ContactInfo.exists? ? ContactInfo.first.contact_page_text.html_safe : 'Default Contact Us Message.'
     # rubocop:enable Rails/OutputSafety
   end
@@ -180,9 +181,9 @@ class StoreController < ApplicationController
     # No view associated with this method, go back
     redirect_to :back
   end
-  
+
   def finished_purchase
-     session.delete(:cart)
+    session.delete(:cart)
   end
 
   def finalize_order
@@ -200,12 +201,12 @@ class StoreController < ApplicationController
       @total_before_taxes += product_cost
       @total_taxes += (tax_rate * product_cost)
     end
-	
+
     values = {
       # get it form your http://sandbox.paypal.com account
       business: 'lionelbergen-facilitator@live.com',
       cmd: '_cart',
-      notify_url: "http://localhost:3000/store/finished_purchase",
+      notify_url: 'http://localhost:3000/store/finished_purchase',
       upload: 1,
       return: 'http://localhost:3000'
     }
@@ -230,13 +231,15 @@ class StoreController < ApplicationController
   def initialize_session
     session[:cart] ||= []
   end
-  
+
+  # rubocop:disable Metrics/ParameterLists
   def fill_customer_record(new_customer, first_name, last_name, email, home_address, city, province)
     new_customer.assign_attributes(first_name: first_name,
-                                    last_name: last_name,
-                                    email: email,
-                                    home_address: home_address,
-                                    city: city,
-                                    province_id: province)
+                                   last_name: last_name,
+                                   email: email,
+                                   home_address: home_address,
+                                   city: city,
+                                   province_id: province)
   end
+  # rubocop:enable Metrics/ParameterLists
 end

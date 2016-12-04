@@ -20,10 +20,10 @@ Metrics/LineLength:
   Max: 150
 
 Metrics/MethodLength:
-  Max: 30
+  Max: 40
 
 Metrics/ClassLength:
-  Max: 150
+  Max: 200
 
 Metrics/AbcSize:
   Enabled: false
