@@ -51,6 +51,8 @@ Rails.application.routes.draw do
   get 'store/order_summary'
 
   get 'store/finalize_order'
+  
+  get 'store/finished_purchase'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
