@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'pg'
 gem 'puma', '~> 3.0'
-#gem 'sass-rails', '~> 5.0'
+# gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
@@ -11,18 +11,23 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'rails-assets-tether', '>= 1.1.0'
 
+gem 'paypal-sdk-rest'
+gem 'paypal-sdk-merchant'
+
 gem 'yaml_db'
 
 # gem used for pagintation: http://railscasts.com/episodes/254-pagination-with-kaminari
 gem 'kaminari'
+
+gem 'rubocop'
 
 # Three gems for activeadmin
 gem 'activeadmin', github: 'activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'devise'
 
-#Bootstrap! https://github.com/twbs/bootstrap-rubygem
-gem 'sprockets-rails', :require => 'sprockets/railtie'
+# Bootstrap! https://github.com/twbs/bootstrap-rubygem
+gem 'sprockets-rails', require: 'sprockets/railtie'
 gem 'bootstrap', '~> 4.0.0.alpha5'
 
 # Image uploads! Carrierwave https://github.com/carrierwaveuploader/carrierwave

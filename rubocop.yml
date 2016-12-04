@@ -1,0 +1,32 @@
+AllCops:
+  Exclude:
+    - db/**/*
+    - config/**/*
+    - script/**/*
+    - bin/**/*
+    - test/**/*
+    - app/admin/**/*
+    - app/models/ckeditor/*
+    - app/views/customers/_customer.json.jbuilder
+    - app/uploaders/product_image_uploader_uploader.rb
+
+Encoding:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 150
+
+Metrics/MethodLength:
+  Max: 30
+
+Metrics/ClassLength:
+  Max: 150
+
+Metrics/AbcSize:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
